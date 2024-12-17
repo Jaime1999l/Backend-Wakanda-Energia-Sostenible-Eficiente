@@ -1,0 +1,49 @@
+@startuml
+start
+
+:Inicio del sistema;
+
+partition "Consulta de Información General" {
+    :Usuario solicita información de la planta;
+    :Consultar PlantaTratamientoEnergia;
+    :Obtener DatosCalidadEnergia;
+    :Devolver información general al usuario;
+}
+
+partition "Lecturas de Calidad de Energía" {
+    if ("¿Usuario solicita lecturas de voltaje?") then (Sí)
+        :Consultar SensorEnergia;
+        :Obtener lecturas históricas de LecturaSensorEnergia;
+        :Devolver lecturas de voltaje al usuario;
+    endif
+    if ("¿Usuario solicita eficiencia energética?") then (Sí)
+        :Consultar SensorEnergia;
+        :Obtener lecturas históricas de LecturaSensorEnergia;
+        :Devolver eficiencia energética al usuario;
+    endif
+    if ("¿Usuario solicita pérdidas energéticas?") then (Sí)
+        :Consultar SensorEnergia;
+        :Obtener lecturas históricas de LecturaSensorEnergia;
+        :Devolver pérdidas energéticas al usuario;
+    endif
+}
+
+partition "Lecturas de Operación de la Planta" {
+    if ("¿Usuario solicita consumo actual de energía?") then (Sí)
+        :Consultar SensorEnergia;
+        :Obtener lecturas históricas de LecturaSensorEnergia;
+        :Devolver consumo actual al usuario;
+    endif
+    if ("¿Usuario solicita temperatura de dispositivos?") then (Sí)
+        :Consultar SensorEnergia;
+        :Obtener lecturas históricas de LecturaSensorEnergia;
+        :Devolver temperatura de dispositivos al usuario;
+    endif
+}
+
+partition "Finalización" {
+    :Finalizar interacción;
+}
+
+stop
+@enduml
