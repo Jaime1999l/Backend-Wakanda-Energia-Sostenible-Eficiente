@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "Usuario Visitante" as Visitante
+
+package "Casos de Uso" {
+
+usecase "Consultar información general de la planta de energía" as UC1
+usecase "Visualizar lecturas de voltaje" as UC2
+usecase "Visualizar eficiencia energética" as UC3
+usecase "Visualizar pérdidas energéticas detectadas" as UC4
+usecase "Visualizar consumo actual de energía" as UC5
+usecase "Visualizar temperatura de los dispositivos" as UC6
+
+    Visitante --> UC1 : "Consulta general"
+    Visitante --> UC2 : "Lecturas de voltaje"
+    Visitante --> UC3 : "Eficiencia energética"
+    Visitante --> UC4 : "Pérdidas energéticas"
+    Visitante --> UC5 : "Consumo actual"
+    Visitante --> UC6 : "Temperatura de dispositivos"
+
+}
+@enduml
