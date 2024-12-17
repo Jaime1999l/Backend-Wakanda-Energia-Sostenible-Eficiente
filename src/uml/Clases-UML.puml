@@ -1,0 +1,77 @@
+@startuml
+package "Dominio" {
+
+    package "Infraestructura" {
+        ' Clase principal: Planta de Tratamiento de Energía
+        class PlantaTratamientoEnergia {
+            - id: Long
+            - nombre: String
+            - ubicacion: String
+            - capacidadMaximaKW: Double
+            - estadoOperativo: String
+            - tipoEnergia: String
+        }
+
+        ' Datos de Calidad de Energía gestionados por la planta
+        class DatosCalidadEnergia {
+            - id: Long
+            - fechaMedicion: Date
+            - voltaje: Double
+            - eficienciaEnergetica: Double
+            - perdidasEnergeticas: String
+            - consumoActualKWPorHora: Double
+            - temperaturaDispositivoCelsius: Double
+        }
+
+        ' Sensor relacionado con la planta y lecturas
+        class SensorEnergia {
+            - id: Long
+            - tipoSensor: String
+            - ubicacionExacta: String
+            - ultimaFechaEvento: Date
+            - estado: String
+        }
+
+        ' Lectura del Sensor: registros históricos
+        class LecturaSensorEnergia {
+            - id: Long
+            - fechaRegistro: Date
+            - valorMedido: Double
+            - unidadMedida: String
+            - tipoParametro: String
+        }
+
+        ' Relaciones principales
+        PlantaTratamientoEnergia "1" o-- "1" DatosCalidadEnergia : mide
+        PlantaTratamientoEnergia "1" o-- "0..*" SensorEnergia : supervisa
+        SensorEnergia "1" o-- "0..*" LecturaSensorEnergia : genera
+    }
+
+    package "Usuarios" {
+        ' Usuario que consulta datos
+        class Usuario {
+            - id: Long
+            - nombre: String
+            - apellido: String
+            - email: String
+            - telefono: String
+            - credenciales: Credenciales
+            - roles: List<String>
+        }
+
+        ' Credenciales del usuario
+        class Credenciales {
+            - id: Long
+            - correoElectronico: String
+            - contrasena: String
+            - usuario: Usuario
+        }
+
+        ' Relación entre usuario y credenciales
+        Usuario "1" o-- "1" Credenciales : tiene
+
+        ' Relación entre Usuario y Sensor/LecturaSensor
+        Usuario "1" --> "0..*" Infraestructura.LecturaSensorEnergia : analiza
+    }
+}
+@enduml
