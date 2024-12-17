@@ -1,0 +1,44 @@
+@startuml
+actor "Usuario Visitante" as Visitante
+
+participant "PlantaTratamientoEnergia" as Planta
+participant "SensorEnergia" as Sensor
+participant "LecturaSensorEnergia" as Lectura
+participant "DatosCalidadEnergia" as Datos
+
+== Consultar información general de la planta ==
+Visitante -> Planta : Solicitar información general
+Planta --> Datos : Obtener datos de calidad de la energía
+Datos --> Planta : Devolver datos generales
+Planta --> Visitante : Enviar información general
+
+== Visualizar lecturas de voltaje ==
+Visitante -> Sensor : Solicitar lecturas de voltaje
+Sensor --> Lectura : Obtener lecturas históricas
+Lectura --> Sensor : Devolver lecturas de voltaje
+Sensor --> Visitante : Enviar lecturas de voltaje
+
+== Visualizar eficiencia energética ==
+Visitante -> Sensor : Solicitar eficiencia energética
+Sensor --> Lectura : Obtener lecturas históricas
+Lectura --> Sensor : Devolver datos de eficiencia
+Sensor --> Visitante : Enviar eficiencia energética
+
+== Visualizar pérdidas energéticas detectadas ==
+Visitante -> Sensor : Solicitar pérdidas energéticas
+Sensor --> Lectura : Obtener lecturas históricas
+Lectura --> Sensor : Devolver datos de pérdidas
+Sensor --> Visitante : Enviar datos de pérdidas energéticas
+
+== Visualizar consumo actual de energía ==
+Visitante -> Sensor : Solicitar consumo de energía
+Sensor --> Lectura : Obtener lecturas históricas
+Lectura --> Sensor : Devolver consumo actual
+Sensor --> Visitante : Enviar consumo de energía
+
+== Visualizar temperatura de dispositivos ==
+Visitante -> Sensor : Solicitar temperatura de dispositivos
+Sensor --> Lectura : Obtener lecturas históricas
+Lectura --> Sensor : Devolver temperaturas
+Sensor --> Visitante : Enviar temperatura de dispositivos
+@enduml
