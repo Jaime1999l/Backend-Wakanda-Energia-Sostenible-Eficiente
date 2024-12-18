@@ -25,3 +25,75 @@
 - Marcos García Benito
 - Nicolas Jimenez
 - Juan Manuel
+
+## Servicios
+Este microservicio basado en el tratamiento de agua en Wakanda, contiene varios servicios responsables de gestionar diferentes aspectos del sistema. A continuación, se presenta un desglose de los servicios:
+
+### UsuarioService
+El `UsuarioService` es responsable de gestionar las cuentas de usuario. Proporciona operaciones CRUD para los usuarios y sus credenciales asociadas.
+**Métodos:**
+- **`findAll()`**: Recupera una lista de todas las cuentas de usuario.
+- **`get(Long id)`**: Recupera una cuenta de usuario específica por su ID.
+- **`create(UsuarioDTO dto)`**: Crea una nueva cuenta de usuario junto con sus credenciales.
+- **`update(Long id, UsuarioDTO dto)`**: Actualiza una cuenta de usuario existente y sus credenciales.
+- **`delete(Long id)`**: Elimina una cuenta de usuario y sus credenciales asociadas.
+  
+### SensorEnergiaService
+El `SensorEnergiaService` gestiona los sensores utilizados para recopilar datos sobre la calidad de la energía suministrada. Maneja operaciones CRUD para los sensores, asigna sensores a plantas de tratamiento y proporciona métodos para la recolección y actualización de datos.
+**Métodos:**
+- **`findAll()`**: Recupera una lista de todos los sensores.
+- **`findById(Long id)`**: Recupera un sensor específico por su ID.
+- **`create(SensorEnergiaDTO dto)`**: Crea un nuevo sensor y lo asigna a una planta de tratamiento sin sensores.
+- **`findSensoresByPlanta(Long plantaId)`**: Recupera una lista de sensores asociados con una planta de tratamiento específica.
+- **`update(Long id, SensorEnergiaDTO dto)`**: Actualiza un sensor existente.
+- **`delete(Long id)`**: Elimina un sensor.
+- **`scrapeDatosYActualizarSensores()`**: Recolecta periódicamente datos de las plantas de tratamiento y actualiza los sensores asociados.
+  
+### PlantaTratamientoEnergiaService
+El `PlantaTratamientoEnergiaService` gestiona las plantas de tratamiento de agua. Proporciona operaciones CRUD para las plantas, incluida la capacidad de crear nuevas plantas y asignarlas a sensores.
+**Métodos:**
+- **`findAll()`**: Recupera una lista de todas las plantas de tratamiento.
+- **`findById(Long id)`**: Recupera una planta de tratamiento específica por su ID.
+- **`create(PlantaTratamientoDTO dto)`**: Crea una nueva planta de tratamiento.
+- **`update(Long id, PlantaTratamientoDTO dto)`**: Actualiza una planta de tratamiento existente.
+- **`delete(Long id)`**: Elimina una planta de tratamiento.
+  
+### LecturaSensorEnergiaService
+El `LecturaSensorEnergiaService` gestiona las lecturas de los sensores. Proporciona operaciones CRUD para las lecturas y métodos para recuperar lecturas asociadas a sensores específicos.
+**Métodos:**
+- **`findAll()`**: Recupera una lista de todas las lecturas de sensores.
+- **`findById(Long id)`**: Recupera una lectura específica de sensor por su ID.
+- **`create(LecturaSensor lecturaSensor)`**: Crea una nueva lectura de sensor.
+- **`update(Long id, LecturaSensorDTO dto)`**: Actualiza una lectura de sensor existente.
+- **`delete(Long id)`**: Elimina una lectura de sensor.
+- **`findBySensorId(Long sensorId)`**: Recupera una lista de lecturas asociadas con un sensor específico.
+  
+### DatosCalidadEnergiaService
+El `DatosCalidadEnergiaService` maneja los datos de calidad del agua. Proporciona métodos para generar datos aleatorios de calidad del agua y convertir entre entidades de datos y DTOs.
+**Métodos:**
+- **`toDTO(DatosCalidadEnergia datos)`**: Convierte una entidad `DatosCalidadEnergiaService` a un `DatosCalidadEnergiaServiceDTO`.
+- **`toEntity(DatosCalidadEnergiaServiceDTO dto)`**: Convierte un `DatosCalidadEnergiaServiceDTO` a una entidad `DatosCalidadEnergiaService`.
+- **`generarDatosAleatorios()`**: Genera datos aleatorios de calidad del agua.
+
+## Endpoints REST
+El proyecto también incluye endpoints REST para interactuar con los servicios. Endpoints:
+
+### Endpoints de Usuario
+- **`/usuarios`**: GET (recuperar todos los usuarios), POST (crear un nuevo usuario)
+- **`/usuarios/{id}`**: GET (recuperar un usuario por ID), PUT (actualizar un usuario por ID), DELETE (eliminar un usuario por ID)
+
+## Endpoints REST-Controller:
+  
+### Endpoints de Sensor
+- **`/sensores-energia`**: GET (recuperar todos los sensores), POST (crear un nuevo sensor)
+- **`/sensores-energia/{id}`**: GET (recuperar un sensor por ID), PUT (actualizar un sensor por ID), DELETE (eliminar un sensor por ID)
+- **`/sensores-energia/planta/{plantaId}`**: GET (recuperar sensores asociados con una planta de tratamiento)
+  
+### Endpoints de Planta de Tratamiento
+- **`/plantas-energia`**: GET (recuperar todas las plantas de tratamiento), POST (crear una nueva planta de tratamiento)
+- **`/plantas-energia/{id}`**: GET (recuperar una planta de tratamiento por ID), PUT (actualizar una planta de tratamiento por ID), DELETE (eliminar una planta de tratamiento por ID)
+  
+### Endpoints de Lectura de Sensor
+- **`/lecturas-energia`**: GET (recuperar todas las lecturas de sensores), POST (crear una nueva lectura de sensor)
+- **`/lecturas-energia/{id}`**: GET (recuperar una lectura de sensor por ID), PUT (actualizar una lectura de sensor por ID), DELETE (eliminar una lectura de sensor por ID)
+- **`/lecturas-energia/sensor-energia/{sensorId}`**: GET (recuperar lecturas asociadas con un sensor específico)
