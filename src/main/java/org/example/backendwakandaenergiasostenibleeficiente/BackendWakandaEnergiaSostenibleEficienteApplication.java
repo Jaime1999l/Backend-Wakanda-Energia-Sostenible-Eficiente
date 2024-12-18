@@ -19,7 +19,7 @@ import java.util.List;
 
 @SpringBootApplication
 @EnableScheduling
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 public class BackendWakandaEnergiaSostenibleEficienteApplication {
 
     public static void main(String[] args) {
