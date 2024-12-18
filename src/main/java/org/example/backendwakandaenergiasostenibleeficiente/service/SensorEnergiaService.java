@@ -148,6 +148,9 @@ public class SensorEnergiaService {
 
         // Scraping de datos y asignación a sensores
         for (int i = 0; i < plantas.size(); i++) {
+            if (i >= sensores.size()) {
+                break; // Ensure we do not access out of bounds
+            }
             PlantaTratamientoEnergia planta = plantas.get(i);
             SensorEnergia sensor = sensores.get(i);
 
