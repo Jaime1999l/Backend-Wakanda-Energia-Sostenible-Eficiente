@@ -27,7 +27,7 @@
 - Juan Manuel
 
 ## Servicios
-Este microservicio basado en el tratamiento de agua en Wakanda, contiene varios servicios responsables de gestionar diferentes aspectos del sistema. A continuación, se presenta un desglose de los servicios:
+Este microservicio basado en gestión energética eficiente en Wakanda, contiene varios servicios responsables de gestionar diferentes aspectos del sistema. A continuación, se presenta un desglose de los servicios:
 
 ### UsuarioService
 El `UsuarioService` es responsable de gestionar las cuentas de usuario. Proporciona operaciones CRUD para los usuarios y sus credenciales asociadas.
